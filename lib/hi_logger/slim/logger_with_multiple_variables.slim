@@ -1,0 +1,12 @@
+.hi-logger.hi-rounded-corners
+  .hi-logger-header
+    div.hi-code-info
+      = self[ :stack ][0].to_s
+    .hi-code-line
+      = self[ :stack ][0].code_line
+  .hi-logger-body
+    - self[ :objects ].each do |object|
+      .hi-logger-section
+        .hi-logger-output
+          == object.to_hi_html( self[ :history ] )
+  div style="clear:both;"

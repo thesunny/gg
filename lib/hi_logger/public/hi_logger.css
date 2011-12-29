@@ -1,0 +1,90 @@
+/* LAYOUT */
+
+.hi-rounded-corners {
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -khtml-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.hi-logger {
+  border: 1px dotted #CCC;
+  padding: 10px;
+  background-color: #F8F8F8;
+  font: 13px arial;
+  margin-bottom: 10px;
+  color: #888;
+}
+
+.hi-logger-header {
+  color: black;
+  margin-bottom: 10px;
+}
+
+.hi-code-info {
+  color: #808080;
+  font: 11px arial;
+  margin-bottom: 3px;
+}
+
+.hi-code-line {
+  font: 12px consolas, monospace;
+  background-color: #FFFFF0;
+  padding: 5px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px dotted #C0C0C0;
+  float: left;
+  margin-bottom: 4px;
+}
+
+.hi-logger-body {
+  clear: both;
+}
+
+.hi-logger-section {
+  float: left;
+  padding: 5px;
+  border: 1px dotted #CCC;
+  margin-right: 5px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+/* OBJECT LAYOUT */
+
+.hi-indent {
+  margin-left: 20px
+}
+
+/* OBJECTS */
+
+.hi-string {
+  color: #048;
+}
+
+.hi-Numeric {
+  color: #080;
+}
+
+.hi-NilClass {
+  color: #888;
+}
+
+.hi-TrueClass, .hi-FalseClass {
+  color: #A0A020;
+}
+
+.hi-Symbol {
+  color: #900;
+}
+
+
+.hi-instance-variable {
+  color: #808;
+}

@@ -1,0 +1,3 @@
+module HiLogger
+  VERSION = "0.0.1"
+end

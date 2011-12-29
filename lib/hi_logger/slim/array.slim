@@ -1,0 +1,9 @@
+span.hi-Array
+  '[
+  .hi-indent
+    - self[ :object ].each_with_index do |item,i|
+      div
+        == item.to_hi_html( self[ :history ] )
+        - if i < self[ :object ].length-1 
+          ',
+  ']

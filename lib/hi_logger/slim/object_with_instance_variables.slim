@@ -1,0 +1,10 @@
+div class="#{ self[ :classname ] }"
+  = "#<#{ self[ :object ].class }"
+  .hi-indent
+    - self[ :object ].instance_variables.each do |key|
+      div
+        span.hi-instance-variable
+          = key
+        ':
+        == self[ :object ].instance_variable_get( key ).to_hi_html( self[ :history ] )
+  '>

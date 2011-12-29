@@ -1,0 +1,12 @@
+span.hi-Hash
+  '{
+  .hi-indent
+    - self[ :object ].each_with_index do |key_value,i|
+      - key, value = *key_value
+      div
+        ==' key.to_hi_html( self[ :history ] )
+        '=&gt;
+        == value.to_hi_html( self[ :history ] )
+        - if i < self[ :object ].keys.size-1 
+          ',
+  '}
