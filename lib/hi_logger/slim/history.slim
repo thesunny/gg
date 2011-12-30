@@ -1,0 +1,12 @@
+link href="/hi_logger/main.css" type="text/css" rel="stylesheet"
+div style="margin:10px auto;width:940px;"
+  .hi-history-pagination
+    - (0..[self[:history].size-1,9].min).each do |i|
+      a href="/hi_logger/history/#{ i }"
+        =i
+  -if self[ :logger ].nil?
+    h1.hi-history-heading No Log At This Position in History
+  -else
+    h1.hi-history-heading= self[ :logger ].request.path_info
+    p.hi-history-subheading= self[ :logger ].time
+    == self[ :logger ].html

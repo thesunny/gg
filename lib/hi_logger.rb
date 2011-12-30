@@ -6,6 +6,7 @@ require 'hi_logger/version'
 require 'hi_logger/rack_plugin'
 require 'hi_logger/demo_app'
 require 'hi_logger/core'
+require 'hi_logger/logger'
 
 module HiLogger
   

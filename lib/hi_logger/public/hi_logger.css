@@ -88,3 +88,35 @@
 .hi-instance-variable {
   color: #808;
 }
+
+/* HISTORY VIEW */
+
+.hi-history-heading {
+  font: bold 24px arial;
+  margin: 0px;
+  clear: both;
+}
+.hi-history-subheading {
+  font: 16px arial;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+.hi-history-pagination {
+  padding: 6px 0px;
+}
+.hi-history-pagination a {
+  font: 13px arial;
+  float: left;
+  display: block;
+  border: 1px solid silver;
+  padding: 5px 10px;
+  margin-right: 5px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #404040;
+  background-color: #F0F0F0;
+}
+.hi-history-pagination a:hover {
+  background-color: #D0D0FF;  
+}
+
