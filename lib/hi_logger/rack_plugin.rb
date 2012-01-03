@@ -53,8 +53,8 @@ class HiLogger::RackPlugin
   end
   
   def result_is_html( result )
-    return true if result.respond_to?( :content_type ) && result.content_type == 'text/html'
-    return true if result.is_a?( Array ) && result[1][ 'Content-Type' ] == 'text/html'    
+    return true if result.respond_to?( :content_type ) && result.content_type.match( %r{^text[/]html})
+    return true if result.is_a?( Array ) && result[1][ 'Content-Type' ] && result[1][ 'Content-Type' ].match( %r{^text[/]html})    
     false
   end
   
