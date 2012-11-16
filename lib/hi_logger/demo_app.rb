@@ -2,7 +2,7 @@ class HiLogger::DemoApp
   
   class Custom
     
-    def initialize( shape, size, color )
+    def initialize(shape, size, color)
       @shape = shape
       @size = size
       @color = color
@@ -12,7 +12,7 @@ class HiLogger::DemoApp
     
   end
   
-  def call( env )
+  def call(env)
     case env[ 'PATH_INFO' ]
     when '/'
       response = Rack::Response.new

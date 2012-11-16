@@ -8,10 +8,11 @@ class HiLogger::Logger
     @env = env
     @time = Time.now
     @html_array = []
+    @console_array = []
     @is_empty = true
   end
   
-  attr_reader :env, :time, :html_array
+  attr_reader :env, :time, :html_array, :console_array
   attr_accessor :response
   
   def request

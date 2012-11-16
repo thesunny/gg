@@ -1,8 +1,17 @@
 # HiLogger
 
+## WARNINGS! Could not determine CONTENT-LENGTH of response body
+
+The warning "Could not determine content-length of response body" is a
+Webrick bug and not a HiLogger bug. In production, if you use Thin, this
+bug will disappear.
+
+
+## Overview
+
 HiLogger is a debugging tool like FireBug for Ruby Rack applications
-including Rails. It lets you output values to the browser while you work on
-and debug your web application.
+like Rails and Sinatra. It lets you log variables/values to the browser while
+you work on and debug your web application.
 
 To use it, simply call "gg" from anywhere in your application.
 gg stands for the "gg" in "logger" but was also chosen because it is easy to
@@ -33,9 +42,10 @@ gg MyObject.new( 'cool object' )
 ## Choosing Injection Points
 
 HiLogger always adds the required CSS file at the top of the <head> tag.
-If there is no <head> tag then it adds it to the top.
+If there is no <head> tag then it adds it to the top of the content.
 
-HiLogger tries to add the log in the HTML where it finds <!--hi_logger-->.
+HiLogger tries to add the logging information in the HTML where it finds
+<!--hi_logger-->.
 
 If it cannot find <!--hi_logger--> then it adds the HTML to the top of the
 page after the css link.
@@ -55,3 +65,11 @@ Currently, HiLogger is set up to store 10 dumps at:
   ...
   /hi_logger/history/9
   
+
+## Build
+
+  rake build
+
+## Install
+
+  rake install

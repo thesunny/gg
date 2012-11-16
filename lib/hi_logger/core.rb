@@ -15,12 +15,23 @@ module Kernel
         # args[0].to_hi_html({})
       # end
     # else
-      $hi_logger << HiLogger.render( 'slim/logger_with_multiple_variables.slim', 
-        line: caller[0],
-        objects: args,
-        history: history,
-        stack: stack
-      )
+    
+    # RENDER HTML
+    $hi_logger << HiLogger.render( 'slim/logger_with_multiple_variables.slim', 
+      line: caller[0],
+      objects: args,
+      history: history,
+      stack: stack
+    )
+    
+    # RENDER CONSOLE
+    $hi_logger.console_array << <<-EOF
+#{'-'*79}
+#{caller[0]}
+#{stack[0].code_line.strip}
+#{'.'*79}
+#{args.ai({})}
+    EOF
     # end
   end
   

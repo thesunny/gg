@@ -21,8 +21,8 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
   # s.add_runtime_dependency "rest-client"
-  s.add_development_dependency 'awesome_print'
   s.add_development_dependency 'rake'
+  s.add_dependency 'awesome_print'
   s.add_dependency 'rack'
   s.add_dependency 'slim'
   s.add_dependency 'hi_caller'
