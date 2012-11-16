@@ -1,6 +1,6 @@
 require 'forwardable'
 
-class HiLogger::Logger
+class GG::Logger
   
   extend Forwardable
   

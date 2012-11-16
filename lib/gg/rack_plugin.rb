@@ -1,4 +1,4 @@
-class HiLogger::RackPlugin
+class GG
   
   def initialize( app )
     @app = app
@@ -11,15 +11,15 @@ class HiLogger::RackPlugin
   
   def call( env )
     case env[ 'PATH_INFO' ]
-    when '/hi_logger/history'
+    when '/gg/history'
       render_history( 0 )
-    when %r{/hi_logger/history/([0-9])}
+    when %r{/gg/history/([0-9])}
       render_history( $~[1].to_i )
-    when '/hi_logger/main.css'
+    when '/gg/main.css'
       [ 
         200,
         { 'Content-Type' => 'text/css' }, 
-        [ File.read(File.join(File.dirname(__FILE__),'public/hi_logger.css'))]
+        [ File.read(File.join(File.dirname(__FILE__),'public/gg.css'))]
       ]
     else
       render_app( env )
@@ -30,21 +30,21 @@ class HiLogger::RackPlugin
   
   def render_app( env )
     #ap [ $0, *$LOADED_FEATURES ]
-    env[ 'hi_logger' ] = $hi_logger = hi_logger = HiLogger::Logger.new( env )
+    env[ 'gg' ] = $gg = gg = GG::Logger.new( env )
     response = @app.call( env )
     # response = result.is_a?(Rack::Response) ? result : Rack::Response.new(result[2], result[0], result[1])
-    # env[ 'hi_logger' ].response = Rack::Response.new( result )
-    # env[ 'hi_logger' ].response = response
+    # env[ 'gg' ].response = Rack::Response.new( result )
+    # env[ 'gg' ].response = response
     # Logs to the HTML page only if the response type is text/html
-    if !hi_logger.empty?
+    if !gg.empty?
       if response_is_html(response)
-        add_logger_to_response( response, hi_logger )
-        add_logger_to_history( hi_logger )
+        add_logger_to_response( response, gg )
+        add_logger_to_history( gg )
       else
         puts
         puts '='*79
         puts env['REQUEST_URI'] || env['PATH_INFO']  
-        $hi_logger.console_array.each do |item|
+        $gg.console_array.each do |item|
           puts item
         end
       end
@@ -55,7 +55,7 @@ class HiLogger::RackPlugin
   def render_history( i )
     logger = history[i]
     body = logger
-    html = HiLogger.render( 'slim/history.slim', body: body, history: history, logger: logger )
+    html = GG.render( 'slim/history.slim', body: body, history: history, logger: logger )
     [ 200, { 'Content-Type' => 'text/html' }, [ html ] ]
   end
   
@@ -70,12 +70,12 @@ class HiLogger::RackPlugin
     history.slice!( MAX_HISTORY ) # removes item above MAX_HISTORY if there is one
   end
   
-  def add_logger_to_response(response, hi_logger )
-    css_link = %q{<link href="/hi_logger/main.css" type="text/css" rel="stylesheet">}
+  def add_logger_to_response(response, gg )
+    css_link = %q{<link href="/gg/main.css" type="text/css" rel="stylesheet">}
     body = ''
     response[2].each { |s| body << s }
-    if body.sub!( /<!--\s*hi_logger\s*-->/, hi_logger.html ).nil?
-      body.insert( 0, hi_logger.html )
+    if body.sub!( /<!--\s*gg\s*-->/, gg.html ).nil?
+      body.insert( 0, gg.html )
     end
     if body.sub!( /<head>/, "<head>#{ css_link }" ).nil?
       body.insert( 0, css_link )

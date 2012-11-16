@@ -1,4 +1,4 @@
-class HiLogger::DemoApp
+class GG::DemoApp
   
   class Custom
     
@@ -16,28 +16,28 @@ class HiLogger::DemoApp
     case env[ 'PATH_INFO' ]
     when '/'
       response = Rack::Response.new
-      response.write HiLogger.render( 'slim/index.slim' )
+      response.write GG.render( 'slim/index.slim' )
       response
     when '/demo'
       log_stuff
-      [ 200, { 'Content-Type' => 'text/html' }, [ "<h1>HiLogger</h1><p>This is a demo of HiLogger</p>"] ]
+      [ 200, { 'Content-Type' => 'text/html' }, [ "<h1>GG</h1><p>This is a demo of GG</p>"] ]
     when '/inline_demo'
       log_stuff
       [ 200, { 'Content-Type' => 'text/html' }, [ %q{
         <head>
         </head>
         <body>
-          <h1>HiLogger</h1>
-          <p>This is a demo of HiLogger</p>
+          <h1>GG</h1>
+          <p>This is a demo of GG</p>
           <div style="border:1px dotted silver;padding: 10px;background-color:#F0F0F0;">
-            <!--hi_logger-->
+            <!--gg-->
           </div>
           <p>This is a footer</p>
         </body>
       } ] ]
     when '/demo.txt'
       log_stuff
-      [ 200, { 'Content-Type' => 'text/plain' }, [ "This is a demo of HiLogger (output goes to console using awesome_print gem)"] ]
+      [ 200, { 'Content-Type' => 'text/plain' }, [ "This is a demo of GG (output goes to console using awesome_print gem)"] ]
     else
       [ 404, { 'Content-Type' => 'text/html' }, [ "<h1>Page Not Found</h1>" ] ]
     end

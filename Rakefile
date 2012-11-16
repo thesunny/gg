@@ -4,18 +4,18 @@ require "bundler/gem_tasks"
 
 task 'demo' do
   
-  require File.join( File.dirname( __FILE__ ), 'lib/hi_logger' )
+  require File.join( File.dirname( __FILE__ ), 'lib/gg' )
   
   app = Rack::Builder.app do
     use Rack::ShowExceptions
     use Rack::Reloader, 0
-    use HiLogger::RackPlugin
+    use GG
     # Put this here to make sure that serving files like images aren't broken
     # by the logger.
     use Rack::Static, :urls => ["/images"], :root => "public"
     #run HiLogger::DemoApp.new
     run lambda { |env|
-      HiLogger::DemoApp.new.call( env )
+      GG::DemoApp.new.call( env )
       #gg 'Hello World'
       #[ 200, { 'Content-Type' => 'text/html' }, [ "<h1>HiLogger</h1><p>This is a demo of HiLogger</p>"] ]
     }
@@ -25,9 +25,12 @@ task 'demo' do
   
 end                                                                                         
 
+
+# use this for testing to see that if you don't have the rack plugin installed,
+# that it will display useful error messages to the console.
 task 'rackless' do
   
-  require File.join( File.dirname( __FILE__ ), 'lib/hi_logger' )
+  require File.join( File.dirname( __FILE__ ), 'lib/gg' )
   
   app = Rack::Builder.app do
     use Rack::ShowExceptions
@@ -37,9 +40,7 @@ task 'rackless' do
     use Rack::Static, :urls => ["/images"], :root => "public"
     #run HiLogger::DemoApp.new
     run lambda { |env|
-      HiLogger::DemoApp.new.call( env )
-      #gg 'Hello World'
-      #[ 200, { 'Content-Type' => 'text/html' }, [ "<h1>HiLogger</h1><p>This is a demo of HiLogger</p>"] ]
+      GG::DemoApp.new.call( env )
     }
   end
   

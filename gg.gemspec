@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "hi_logger/version"
+require "gg/version"
 
 Gem::Specification.new do |s|
-  s.name        = "hi_logger"
-  s.version     = HiLogger::VERSION
+  s.name        = "gg"
+  s.version     = GG::VERSION
   s.authors     = ["Sunny Hirai"]
   s.email       = ["thesunny@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{Logging to the Browser}
-  s.description = %q{Logging to the Browser}
+  s.summary     = %q{Log to the Browser}
+  s.description = %q{Log to the Browser}
 
-  s.rubyforge_project = "hi_logger"
+  s.rubyforge_project = "gg"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
