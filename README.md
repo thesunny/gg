@@ -9,11 +9,13 @@ bug will disappear.
 
 ## Overview
 
-GG is a debugging tool like FireBug for Ruby Rack applications
+GG is a debugging tool like FireBug but for Ruby Rack applications
 like Rails and Sinatra. It lets you log variables/values to the browser while
 you work on and debug your web application.
 
-To use it, simply call "gg" from anywhere in your application.
+To use it, call "gg" from anywhere in your application followed by the
+objects that you wish to log to the browser.
+
 gg stands for the "gg" in "logger" but was also chosen because it is easy to
 type, even when your right hand is on the mouse. 
 
@@ -31,7 +33,7 @@ gg msg
 GG will output to the screen the "gg msg" call, the call position and
 the data.
 
-It properly works with Hash and Array values as well as custom objects.
+It works with Hash and Array values as well as objects from custom classes.
 
 ```ruby
 gg [ 1, 2, 3]
@@ -42,7 +44,8 @@ gg MyObject.new( 'cool object' )
 ## Choosing Injection Points
 
 GG always adds the required CSS file at the top of the <head> tag.
-If there is no <head> tag then it adds it to the top of the content.
+If there is no <head> tag then it adds it to the top of the content sent to
+the browser.
 
 GG tries to add the logging information in the HTML where it finds
 <!--gg-->.
@@ -51,7 +54,7 @@ If it cannot find <!--gg--> then it adds the HTML to the top of the
 page after the css link.
 
 
-## Non-HTML requests
+## Non-HTML requests (JSON, Images, etc.)
 
 If you call gg during a non-HTML request like a txt, js or css file, GG
 does not return the value to the screen since this would mess up your

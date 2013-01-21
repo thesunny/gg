@@ -1,12 +1,13 @@
 require 'rack'
 require 'awesome_print'
 require 'slim'
-require 'hi_caller'
 require 'gg/version'
 require 'gg/rack_plugin'
 require 'gg/demo_app'
 require 'gg/core'
 require 'gg/logger'
+require 'gg/stack'
+require 'gg/stack_line'
 
 class GG
   
