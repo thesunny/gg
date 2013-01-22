@@ -38,6 +38,19 @@ class GG::DemoApp
     when '/demo.txt'
       log_stuff
       [ 200, { 'Content-Type' => 'text/plain' }, [ "This is a demo of GG (output goes to console using awesome_print gem)"] ]
+    when '/env'
+      gg env
+      [ 200, { 'Content-Type' => 'text/html' }, [ "<h1>GG</h1><p>This is a dump of request.env and should contain some recursion</p><!--gg-->"] ]
+    when '/limit'
+      hash = (1..10).inject({}) do |memo, value|
+        memo[value] = (1..20).inject({}) do |memo, value|
+          memo[value] = rand(1..10)
+          memo
+        end
+        memo
+      end
+      gg hash
+      [ 200, { 'Content-Type' => 'text/html' }, [ "<h1>GG</h1><p>This is a dump of request.env and should contain some recursion</p><!--gg-->"] ]
     else
       [ 404, { 'Content-Type' => 'text/html' }, [ "<h1>Page Not Found</h1>" ] ]
     end
@@ -70,8 +83,12 @@ class GG::DemoApp
     recursive_hash = { a: 'alpha', b: 'bravo' }
     recursive_array = [ :a, :b, recursive_hash ] 
     recursive_hash[ :array ] = recursive_array
+    recursive_object = Object.new
+    recursive_object.instance_variable_set :@hash, recursive_hash
+    recursive_object.instance_variable_set :@array, recursive_array
     gg recursive_hash
     gg recursive_array
+    gg recursive_object
   end
   
 end

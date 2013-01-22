@@ -11,10 +11,10 @@ module Kernel
     #ap args
     #ap caller
     #$gg << "<h1>JFKLDJSKLFSDJKL</h1>"
-                                                                                                                  #ap '======================'
+    #ap '======================'
     #ap args.size
     stack = gg_caller
-    history = {}
+    history = GG::History.new
     # case args.size
     # when 1
       # $gg << GG.render( 'slim/logger.slim', { stack: stack } ) do
@@ -46,6 +46,7 @@ end
 class Object
   
   def to_hi_html(history)
+    return "...recursive..." if history[self]
     history[self] = true
     if self.instance_variables.size == 0                                                        
       GG.render('slim/object.slim',
