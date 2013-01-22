@@ -1,5 +1,20 @@
 # GG
 
+## Rails Setup
+
+Add the following to your Gemfile
+```ruby
+  gem "gg"
+```
+  
+Add the following to /config/application.rb
+```ruby
+  module Editors
+    class Application < Rails::Application
+      config.middleware.use GG
+```
+
+
 ## WARNINGS! Could not determine CONTENT-LENGTH of response body
 
 The warning "Could not determine content-length of response body" is a

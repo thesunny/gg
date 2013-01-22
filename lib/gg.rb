@@ -9,6 +9,9 @@ require 'gg/logger'
 require 'gg/stack'
 require 'gg/stack_line'
 
+# For automatic integration into Rails
+require "gg/railtie" if defined? Rails
+
 class GG
   
   def self.root
