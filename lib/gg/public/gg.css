@@ -64,7 +64,16 @@
 
 /* OBJECTS */
 
-.hi-string {
+.gg-recursive {
+  font-style: italic;
+}
+
+.gg-error {
+  color: #C00;
+  font-style: italic;
+}
+
+.gg-String {
   color: #048;
 }
 

@@ -12,6 +12,12 @@ class GG::DemoApp
     
   end
   
+  class CustomWithError
+    def class
+      throw "Class Call Error"
+    end
+  end
+  
   def call(env)
     case env[ 'PATH_INFO' ]
     when '/'
@@ -78,8 +84,19 @@ class GG::DemoApp
       }
     }
     gg hash
+    
     custom = Custom.new( 'cube', [ 5, 3 ], 'yellow' )
     gg custom
+    
+    custom_with_error = CustomWithError.new
+    gg custom_with_error
+    
+    hash_with_error = {
+      'a' => 'alpha',
+      'custom' => CustomWithError.new
+    }
+    gg hash_with_error
+    
     recursive_hash = { a: 'alpha', b: 'bravo' }
     recursive_array = [ :a, :b, recursive_hash ] 
     recursive_hash[ :array ] = recursive_array
@@ -89,6 +106,12 @@ class GG::DemoApp
     gg recursive_hash
     gg recursive_array
     gg recursive_object
+    
+    non_recursive_hash = {
+      'a' => {1 => true, 2 => true},
+      'b' => {1 => true, 2 => true}
+    }
+    gg non_recursive_hash
   end
   
 end
