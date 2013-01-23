@@ -41,6 +41,10 @@ module Kernel
     # end
   end
   
+  def gg_render_error(e)
+    e.inspect
+  end
+  
 end
 
 class Object
@@ -62,6 +66,8 @@ class Object
       )
     end
     # Rack::Utils.escape_html( self.inspect )
+  rescue => e
+    gg_render_error(e)
   end
 
 end
@@ -70,6 +76,8 @@ class Numeric
   
   def to_hi_html(history)
     GG.render('slim/object.slim', object: self, classname: "hi-Numeric")
+  rescue => e
+    gg_render_error(e)
   end
   
 end
@@ -79,6 +87,8 @@ class String
   def to_hi_html(history)
     GG.render('slim/string.slim', self)
     #Tilt.new( GG.path( 'string.slim' ) ).render( self )
+  rescue => e
+    gg_render_error(e)
   end
   
 end
@@ -89,6 +99,8 @@ class Array
     return "...recursive..." if history[self]
     history[self] = true
     GG.render('slim/array.slim', object: self, history: history)
+  rescue => e
+    gg_render_error(e)
   end
   
 end
@@ -99,5 +111,8 @@ class Hash
     return "...recursive..." if history[self]
     history[self] = true
     GG.render('slim/hash.slim', object: self, history: history)
+  rescue => e
+    gg_render_error(e)
   end
+
 end
