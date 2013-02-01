@@ -1,0 +1,30 @@
+html
+  head
+    link href="/gg/main.css" type="text/css" rel="stylesheet"
+    script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"
+  body
+    .gg
+      h1 GG Index
+      p
+        ' Filter
+        input#filter type="text"
+      table
+        - self[:history].each do |logger|
+          tr class="gg-row" data-path=logger.env['PATH_INFO']
+            td= logger.env['PATH_INFO']
+            td= logger.time
+    javascript:
+      $('#filter').focus().on('keyup', function (e) {
+        var pattern = $('#filter').val();
+        var regexp = new RegExp(pattern);
+        //console.log(pattern);
+        $('.gg-row').each(function () {
+          var row = $(this);
+          var path = row.attr('data-path');
+          if (regexp.test(path)) {
+            row.show();
+          } else {
+            row.hide();
+          }
+        });
+      })

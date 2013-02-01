@@ -59,14 +59,14 @@ class Object
     if self.instance_variables.size == 0                                                        
       GG.render('slim/object.slim',
         object: self, 
-        classname: "hi-#{ self.class }", 
+        classname: "gg-#{ self.class }", 
         state: state
       )
     else
       state.add(self)#[self] = true
       GG.render('slim/object_with_instance_variables.slim', 
         object: self, 
-        classname: "hi-#{ self.class }", 
+        classname: "gg-#{ self.class }", 
         state: state
       )
     end
@@ -80,7 +80,7 @@ end
 class Numeric
   
   def to_hi_html(state)
-    GG.render('slim/object.slim', object: self, classname: "hi-Numeric")
+    GG.render('slim/object.slim', object: self, classname: "gg-Numeric")
   rescue => e
     gg_render_error(e)
   end

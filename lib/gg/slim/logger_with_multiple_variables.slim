@@ -1,12 +1,12 @@
-.hi-logger.hi-rounded-corners
-  .hi-logger-header
-    div.hi-code-info
+.gg-logger.gg-rounded-corners
+  .gg-logger-header
+    div.gg-code-info
       = self[ :stack ][0].to_s
-    .hi-code-line
+    .gg-code-line
       = self[ :stack ][0].code_line
-  .hi-logger-body
+  .gg-logger-body
     - self[ :objects ].each do |object|
-      .hi-logger-section
-        .hi-logger-output
+      .gg-logger-section
+        .gg-logger-output
           == object.to_hi_html( self[ :state ] )
   div style="clear:both;"
