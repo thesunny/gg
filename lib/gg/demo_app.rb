@@ -84,7 +84,7 @@ class GG::DemoApp
     gg Object.new
     gg 123
     gg 12.5
-    gg Object.new, true, :symbol, 'String'
+    gg Object.new, true, false, :symbol, 'String'
     gg true
     gg false
     gg nil
