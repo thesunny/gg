@@ -7,6 +7,7 @@ require 'gg/demo_app'
 require 'gg/core'
 require 'gg/logger'
 require 'gg/state'
+require 'gg/state_builder'
 require 'gg/stack'
 require 'gg/stack_line'
 

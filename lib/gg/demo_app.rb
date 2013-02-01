@@ -48,15 +48,33 @@ class GG::DemoApp
       gg env
       [ 200, { 'Content-Type' => 'text/html' }, [ "<h1>GG</h1><p>This is a dump of request.env and should contain some recursion</p><!--gg-->"] ]
     when '/limit'
-      hash = (1..10).inject({}) do |memo, value|
-        memo[value] = (1..20).inject({}) do |memo, value|
-          memo[value] = rand(1..10)
-          memo
-        end
-        memo
-      end
-      gg hash
-      [ 200, { 'Content-Type' => 'text/html' }, [ "<h1>GG</h1><p>This is a dump of request.env and should contain some recursion</p><!--gg-->"] ]
+      hash = {a: {bravo: 'bravo', b: {c: {d: {e: true}}}}}
+      gg(hash)
+      gg(hash) { depth 1 }
+      gg(hash) { depth nil }
+      array = [1, [2, [3, [4, [5, 6], 7], 8], 9], 10]
+      gg(array)
+      gg(array) { depth 1 }
+      gg(array) { depth nil }
+      o1 = Object.new
+      o2 = Object.new
+      o3 = Object.new
+      o4 = Object.new
+      o5 = Object.new
+      o1.instance_variable_set :@id, :o1
+      o2.instance_variable_set :@id, :o2
+      o3.instance_variable_set :@id, :o3
+      o4.instance_variable_set :@id, :o4
+      o5.instance_variable_set :@id, :o5
+      o1.instance_variable_set :@o2, o2
+      o2.instance_variable_set :@o3, o3
+      o3.instance_variable_set :@o4, o4
+      o4.instance_variable_set :@o5, o5
+      gg o1
+      gg(o1) { depth 1 }
+      gg(o1) { depth nil }
+
+      [ 200, { 'Content-Type' => 'text/html' }, [ "<h1>GG</h1><p>This is a dump of variables with depth limits</p><!--gg-->"] ]
     else
       [ 404, { 'Content-Type' => 'text/html' }, [ "<h1>Page Not Found</h1>" ] ]
     end

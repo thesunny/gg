@@ -14,8 +14,7 @@ module Kernel
     #ap '======================'
     #ap args.size
     stack = gg_caller
-    history = GG::State.new
-    history.instance_eval(&block) if block
+    state = GG::State.new(&block)
     # case args.size
     # when 1
       # $gg << GG.render( 'slim/logger.slim', { stack: stack } ) do
@@ -27,7 +26,7 @@ module Kernel
     $gg << GG.render( 'slim/logger_with_multiple_variables.slim', 
       line: caller[0],
       objects: args,
-      history: history,
+      state: state,
       stack: stack
     )
     
@@ -55,20 +54,20 @@ end
 
 class Object
   
-  def to_hi_html(history)
-    return gg_render_recursive if history.exists?(self)#[self]
+  def to_hi_html(state)
+    return gg_render_recursive if state.exists?(self)#[self]
     if self.instance_variables.size == 0                                                        
       GG.render('slim/object.slim',
         object: self, 
         classname: "hi-#{ self.class }", 
-        history: history
+        state: state
       )
     else
-      history.add(self)#[self] = true
+      state.add(self)#[self] = true
       GG.render('slim/object_with_instance_variables.slim', 
         object: self, 
         classname: "hi-#{ self.class }", 
-        history: history
+        state: state
       )
     end
     # Rack::Utils.escape_html( self.inspect )
@@ -80,7 +79,7 @@ end
 
 class Numeric
   
-  def to_hi_html(history)
+  def to_hi_html(state)
     GG.render('slim/object.slim', object: self, classname: "hi-Numeric")
   rescue => e
     gg_render_error(e)
@@ -90,7 +89,7 @@ end
 
 class String
   
-  def to_hi_html(history)
+  def to_hi_html(state)
     GG.render('slim/string.slim', self)
     #Tilt.new( GG.path( 'string.slim' ) ).render( self )
   rescue => e
@@ -101,10 +100,10 @@ end
 
 class Array
   
-  def to_hi_html(history)
-    return gg_render_recursive if history.exists?(self)#[self]
-    history.add(self)#[self] = true
-    GG.render('slim/array.slim', object: self, history: history)
+  def to_hi_html(state)
+    return gg_render_recursive if state.exists?(self)#[self]
+    state.add(self)#[self] = true
+    GG.render('slim/array.slim', object: self, state: state)
   rescue => e
     gg_render_error(e)
   end
@@ -113,10 +112,10 @@ end
 
 class Hash
   
-  def to_hi_html(history)
-    return gg_render_recursive if history.exists?(self)#self
-    history.add(self) #[self] = true
-    GG.render('slim/hash.slim', object: self, history: history)
+  def to_hi_html(state)
+    return gg_render_recursive if state.exists?(self)#self
+    state.add(self) #[self] = true
+    GG.render('slim/hash.slim', object: self, state: state)
   rescue => e
     gg_render_error(e)
   end

@@ -58,7 +58,7 @@
 
 /* OBJECT LAYOUT */
 
-.hi-indent {
+.gg-indent {
   margin-left: 20px
 }
 
@@ -92,7 +92,6 @@
 .hi-Symbol {
   color: #900;
 }
-
 
 .hi-instance-variable {
   color: #808;

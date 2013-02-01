@@ -1,12 +1,21 @@
-span.hi-Hash
-  '{
-  .hi-indent
-    - self[ :object ].each_with_index do |key_value,i|
-      - key, value = *key_value
-      div
-        ==' key.to_hi_html( self[ :history ] )
-        '=&gt;
-        == value.to_hi_html( self[ :history ] )
-        - if i < self[ :object ].keys.size-1 
-          ',
-  '}
+- state = self[:state]
+- if !state.too_deep?
+  - state.dive
+  span.gg-Hash
+    '{
+    .gg-indent
+      - self[ :object ].each_with_index do |key_value,i|
+        - key, value = *key_value
+        div
+          ==' key.to_hi_html( self[ :state ] )
+          '=&gt;
+          == value.to_hi_html( self[ :state ] )
+          - if i < self[ :object ].keys.size-1 
+            ',
+    '}
+  - state.surface
+- else
+  span.gg-Hash title="Exceeds max depth #{state.max_depth}. Add block to gg { depth #{state.max_depth+1} } to view"
+    '{ ... }
+    /'{...exceeds max depth...}
+    /...&lt;#{self[:object].class.inspect}&gt; max depth #{state.max_depth} exceeded...

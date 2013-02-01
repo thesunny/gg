@@ -1,10 +1,17 @@
-div class="#{ self[ :classname ] }"
-  = "#<#{ self[ :object ].class }"
-  .hi-indent
-    - self[ :object ].instance_variables.each do |key|
-      div
-        span.hi-instance-variable
-          = key
-        ':
-        == self[ :object ].instance_variable_get( key ).to_hi_html( self[ :history ] )
-  '>
+- state = self[:state]
+- if !state.too_deep?
+  - state.dive
+  div class="#{ self[ :classname ] }"
+    = "#<#{ self[ :object ].class }"
+    .gg-indent
+      - self[ :object ].instance_variables.each do |key|
+        div
+          span.hi-instance-variable
+            = key
+          ':
+          == self[ :object ].instance_variable_get( key ).to_hi_html( self[ :state ] )
+    '>
+  - state.surface
+- else
+  span.gg-Array title="Exceeds max depth #{state.max_depth}. Add block to gg { depth #{state.max_depth+1} } to view"
+    = "#<#{ self[ :object ].class } ... >"

@@ -1,9 +1,16 @@
-span.hi-Array
-  '[
-  .hi-indent
-    - self[ :object ].each_with_index do |item,i|
-      div
-        == item.to_hi_html( self[ :history ] )
-        - if i < self[ :object ].length-1 
-          ',
-  ']
+- state = self[:state]
+- if !state.too_deep?
+  - state.dive
+  span.gg-Array
+    '[
+    .gg-indent
+      - self[ :object ].each_with_index do |item,i|
+        div
+          == item.to_hi_html( self[ :state ] )
+          - if i < self[ :object ].length-1 
+            ',
+    ']
+  - state.surface
+- else
+  span.gg-Array title="Exceeds max depth #{state.max_depth}. Add block to gg { depth #{state.max_depth+1} } to view"
+    '[ ... ]
